@@ -1,0 +1,100 @@
+# List of Perl one liners
+
+# To Start a typical Hello world program
+perl -e 'print "Hello World!\n"'
+  
+# Start Perl debugger in "stand-alone" mode
+perl -d -e 42
+
+# Run a Perl script called script.pl with warnings
+perl -w script.pl
+
+# Run a Perl script called script.pl with debugger
+perl -d script.pl
+
+# Run perl a perl script called script.pl, check syntax, print warnings
+perl -wc script.pl	
+
+# Double space a file.
+perl -pe '$\="\n"'
+
+# Double space a file, except the blank lines.
+perl -pe '$_ .= "\n" unless /^$/'
+	
+# Triple Space a file
+perl -pe '$_.="\n\n"'	
+	
+# Rename in each file name the string abc by cba
+ls | perl -ne 'chomp; next unless -e; $o = $_; s/abc/cba/; next if -e; rename $o, $_'; 
+	
+# Add first and last column in each line of file foo.txt and print it out
+perl -lane 'print $F[0] + $F[-1]' foo.txt
+
+# print lines 12 to 16 of file foo.txt
+perl -ne 'print if 12 .. 16' foo.txt
+
+# Another way to print lines 12 to 16 of file foo.txt
+perl -pe 'exit if 12<$. && $.<16' foo.txt
+
+# Change all words "foo"s to "bar"s in every .cpp file
+perl -p -i -e 's/foo/bar/g' *.cpp
+    
+# Change all words "foo"s to "bar"s in every .cpp file and keep backups
+perl -p -i.bak -e 's/\bfoo\b/bar/g' *.cpp
+
+# changes ^M newline characters to newlines 
+perl  -p -i -e 's/\012?\015/\n/g'  $1
+
+# Change all words "foo"s to "bar"s in files named foobar
+perl -p -i -e  's/foo/bar' `find . -name "foobar"`
+
+# Substitution can also be applied to binary files like foobar.bin
+perl -p -i -e 's/255/127/g' foobar.bin
+
+# Substitute filename "foo.func" to "bar.func" in every .html file and keep backups
+perl -p -i.bak -e 's/foo\.func/bar\.func/g' *.html
+
+# Substitute tile tag in a .html file and create a backup of it.
+perl -p -i.old -e 's#<title>#<title>MyWebsite .: #i' *.html
+
+# Delete the first 5 lines in foo.txt and keep a backup foo.txt.old
+perl -i.old -ne 'print unless 1 .. 5' foo.txt
+
+# Change isolated occurrence of abc to cba in each file *.c or *.h
+perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
+
+# Reverses lines of file foo.txt and print it
+perl -e 'print reverse <>' foo.txt
+
+# find palindromes in all dictionarys /usr/share/dict/
+perl -lne 'print if $_ eq reverse' /usr/share/dict/*
+
+# Reverses paragraphs in file foo.txt
+perl -00 -e 'print reverse <>' foo.txt
+
+# Increments all numbers in a document called foo.txt by 1
+perl -pe 's/(\d+)/ 1 + $1 /ge' foo.txt
+
+# Reverses order of characters in each line of foo.txt
+perl -nle 'print scalar reverse $_' foo.txt
+
+# Print lines beween START and END in foo.txt to STDOUT
+perl -ne 'print if /^START$/ .. /^END$/' foo.txt
+
+# Delete lines beween START and END and backup original file 
+perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
+
+# Delete first 20 lines but create a backup first
+perl -i.old -ne 'print unless 1 .. 20' foo.txt 
+
+# Look for duplicated words in a line
+perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
+
+# Count number of non-hidden files in a directory
+perl -le 'print ~~ map {-s} <*>'
+
+#Implement a Binary clock on the command line.
+perl -e 'for(;;sleep 1){printf"\r"."%.4b "x6,split"",`date +%H%M%S`}'
+
+# Make the output of dmesg human readable
+dmesg | perl -pe 's/(\d+)/localtime($1)/e'
