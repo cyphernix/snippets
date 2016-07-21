@@ -54,8 +54,11 @@ perl -p -i -e 's/255/127/g' foobar.bin
 # Substitute filename "foo.func" to "bar.func" in every .html file and keep backups
 perl -p -i.bak -e 's/foo\.func/bar\.func/g' *.html
 
-# Substitute tile tag in a .html file and create a backup of it.
+# Substitute title tag in a .html file and create a backup of it.
 perl -p -i.old -e 's#<title>#<title>MyWebsite .: #i' *.html
+
+# This one is a bit like above but it renames the file name to what is in the html title tag 
+perl -wlne'/title>([^<]+)/i&&rename$ARGV,"$1.html"' *.html
 
 # Change isolated occurrence of abc to cba in each file *.c or *.h in a directory
 perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
