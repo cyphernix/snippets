@@ -57,11 +57,14 @@ perl -p -i.bak -e 's/foo\.func/bar\.func/g' *.html
 # Substitute tile tag in a .html file and create a backup of it.
 perl -p -i.old -e 's#<title>#<title>MyWebsite .: #i' *.html
 
-# Delete the first 5 lines in foo.txt and keep a backup foo.txt.old
-perl -i.old -ne 'print unless 1 .. 5' foo.txt
-
-# Change isolated occurrence of abc to cba in each file *.c or *.h
+# Change isolated occurrence of abc to cba in each file *.c or *.h in a directory
 perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
+
+# Delete lines beween START and END and backup original file 
+perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
+
+# Delete first 20 lines but create a backup first
+perl -i.old -ne 'print unless 1 .. 20' foo.txt 
 
 # Reverses lines of file foo.txt and print it
 perl -e 'print reverse <>' foo.txt
@@ -80,12 +83,6 @@ perl -nle 'print scalar reverse $_' foo.txt
 
 # Print lines beween START and END in foo.txt to STDOUT
 perl -ne 'print if /^START$/ .. /^END$/' foo.txt
-
-# Delete lines beween START and END and backup original file 
-perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
-
-# Delete first 20 lines but create a backup first
-perl -i.old -ne 'print unless 1 .. 20' foo.txt 
 
 # Look for duplicated words in a line
 perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
