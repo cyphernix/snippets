@@ -13,7 +13,10 @@ perl -w script.pl
 perl -d script.pl
 
 # Run perl a perl script called script.pl, check syntax, print warnings
-perl -wc script.pl	
+perl -wc script.pl
+
+# Do an update to Upgrade all Perl modules via CPAN
+perl -MCPAN -e 'CPAN::Shell->install(CPAN::Shell->r)'
 
 # Double space a file.
 perl -pe '$\="\n"'
