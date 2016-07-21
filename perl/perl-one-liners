@@ -60,11 +60,14 @@ perl -p -i.bak -e 's/foo\.func/bar\.func/g' *.html
 # Substitute title tag in a .html file and create a backup of it.
 perl -p -i.old -e 's#<title>#<title>MyWebsite .: #i' *.html
 
-# This one is a bit like above but it renames the file name to what is in the html title tag 
+# This one is a bit like above but although it renames the file name to what is in the html title tag 
 perl -wlne'/title>([^<]+)/i&&rename$ARGV,"$1.html"' *.html
 
 # Change isolated occurrence of abc to cba in each file *.c or *.h in a directory
 perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
+
+# Convert from DOS to Unix line endings.
+perl -pi -e 's/\r\n?/\n/g'
 
 # Delete lines beween START and END and backup original file 
 perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
@@ -98,6 +101,9 @@ perl -le 'print ~~ map {-s} <*>'
 
 #Implement a Binary clock on the command line.
 perl -e 'for(;;sleep 1){printf"\r"."%.4b "x6,split"",`date +%H%M%S`}'
+
+# Convert Epoch time to localtime 
+perl -pe's/([\d.]+)/localtime $1/e;'
 
 # Make the output of dmesg human readable
 dmesg | perl -pe 's/(\d+)/localtime($1)/e'
