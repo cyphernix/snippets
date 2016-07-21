@@ -47,7 +47,7 @@ int main()
     */
 
     int client;
-    int portNum = 1500; // NOTE that the port number is same for both client and server
+    int portNum = 1025; // NOTE that the port number is same for both client and server
     bool isExit = false;
     int bufsize = 1024;
     char buffer[bufsize];
