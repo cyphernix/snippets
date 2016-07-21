@@ -12,7 +12,7 @@ perl -w script.pl
 # Run a Perl script called script.pl with debugger
 perl -d script.pl
 
-# Run perl a perl script called script.pl, check syntax, print warnings
+# Run a perl script called script.pl, check syntax then print warnings
 perl -wc script.pl
 
 # Do an update to Upgrade all Perl modules via CPAN
@@ -103,7 +103,7 @@ perl -le 'print ~~ map {-s} <*>'
 perl -e 'for(;;sleep 1){printf"\r"."%.4b "x6,split"",`date +%H%M%S`}'
 
 # Convert Epoch time to localtime 
-perl -pe's/([\d.]+)/localtime $1/e;'
+perl -pe 's/([\d.]+)/localtime $1/e;'
 
 # Make the output of dmesg human readable
 dmesg | perl -pe 's/(\d+)/localtime($1)/e'
