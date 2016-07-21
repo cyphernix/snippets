@@ -90,3 +90,8 @@ perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
 
 # Look for duplicated words in a line
 perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
+
+## Logging
+
+# Make the output of dmesg human readable
+dmesg | perl -pe 's/(\d+)/localtime($1)/e'
