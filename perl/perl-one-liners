@@ -1,6 +1,6 @@
-## Basic Perl Operations
+# List of Perl one liners
 
-# Typical Hello world program
+# To Start a typical Hello world program
 perl -e 'print "Hello World!\n"'
   
 # Start Perl debugger in "stand-alone" mode
@@ -15,8 +15,6 @@ perl -d script.pl
 # Run perl a perl script called script.pl, check syntax, print warnings
 perl -wc script.pl	
 
-## File Spacing
-
 # Double space a file.
 perl -pe '$\="\n"'
 
@@ -28,8 +26,6 @@ perl -pe '$_.="\n\n"'
 	
 # Rename in each file name the string abc by cba
 ls | perl -ne 'chomp; next unless -e; $o = $_; s/abc/cba/; next if -e; rename $o, $_'; 
-
-## Transformation
 	
 # Add first and last column in each line of file foo.txt and print it out
 perl -lane 'print $F[0] + $F[-1]' foo.txt
@@ -88,10 +84,17 @@ perl -ne 'print if /^START$/ .. /^END$/' foo.txt
 # Delete lines beween START and END and backup original file 
 perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
 
+# Delete first 20 lines but create a backup first
+perl -i.old -ne 'print unless 1 .. 20' foo.txt 
+
 # Look for duplicated words in a line
 perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
 
-## Logging
+# Count number of non-hidden files in a directory
+perl -le 'print ~~ map {-s} <*>'
+
+#Implement a Binary clock on the command line.
+perl -e 'for(;;sleep 1){printf"\r"."%.4b "x6,split"",`date +%H%M%S`}'
 
 # Make the output of dmesg human readable
 dmesg | perl -pe 's/(\d+)/localtime($1)/e'
