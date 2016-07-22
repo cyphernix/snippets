@@ -128,3 +128,9 @@ perl -pe 's/([\d.]+)/localtime $1/e;'
 
 # Make the output of dmesg human readable
 dmesg | perl -pe 's/(\d+)/localtime($1)/e'
+
+# Remove entries from ssh known_hosts file.
+perl -i -n -e "print unless (\$. == $1)" ~/.ssh/known_hosts;
+
+# Set an xterm title
+perl -e 'print "\c[];@ARGV\a"' Insert Title Here
