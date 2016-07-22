@@ -134,3 +134,6 @@ perl -i -n -e "print unless (\$. == $1)" ~/.ssh/known_hosts;
 
 # Set an xterm title
 perl -e 'print "\c[];@ARGV\a"' Insert Title Here
+
+# Perl Calculator
+perl -ple '$_=eval'
