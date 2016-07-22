@@ -85,7 +85,7 @@ perl -pi -e 's/\r\n?/\n/g'
 perl -ne 'tr/A-Z/a-z/; print' foo.txt
 
 #Convert from Lowercase to Uppercase
-perl -ne 'tr/A-Z/a-z/; print' foo.txt
+perl -ne 'tr/a-z/A-Z/; print' foo.txt
 
 # Delete lines beween START and END and backup original file 
 perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
@@ -96,8 +96,8 @@ perl -i.old -ne 'print unless 1 .. 20' foo.txt
 # Reverses lines of file foo.txt and print it
 perl -e 'print reverse <>' foo.txt
 
-# find palindromes in all dictionarys /usr/share/dict/
-perl -lne 'print if $_ eq reverse' /usr/share/dict/*
+# find palindromes in /usr/share/dict/cracklib-small
+perl -lne 'print if $_ eq reverse' /usr/share/dict/cracklib-small
 
 # Reverses paragraphs in file foo.txt
 perl -00 -e 'print reverse <>' foo.txt
