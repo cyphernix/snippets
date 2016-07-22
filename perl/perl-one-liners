@@ -18,6 +18,9 @@ perl -wc script.pl
 # Do an update to Upgrade all Perl modules via CPAN
 perl -MCPAN -e 'CPAN::Shell->install(CPAN::Shell->r)'
 
+# Get a list of all installed perl modules on a machine.
+perl -MFile::Find=find -MFile::Spec::Functions -Tlw -e 'find { wanted => sub { print canonpath $_ if /\.pm\z/ }, no_chdir => 1 }, @INC'
+
 # Double space a file.
 perl -pe '$\="\n"'
 
@@ -69,6 +72,12 @@ perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
 # Convert from DOS to Unix line endings.
 perl -pi -e 's/\r\n?/\n/g'
 
+#Convert from Uppercase to Lowercase
+perl -ne 'tr/A-Z/a-z/; print' foo.txt
+
+#Convert from Lowercase to Uppercase
+perl -ne 'tr/A-Z/a-z/; print' foo.txt
+
 # Delete lines beween START and END and backup original file 
 perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
 
@@ -92,6 +101,9 @@ perl -nle 'print scalar reverse $_' foo.txt
 
 # Print lines beween START and END in foo.txt to STDOUT
 perl -ne 'print if /^START$/ .. /^END$/' foo.txt
+
+# Print Prime Numbers up until 128
+perl -e'$,=",";print sub { grep { $a=$_; !grep { !($a % $_) } (2..$_-1)} (2..$_[0]) }->(shift)' 128
 
 # Look for duplicated words in a line
 perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
