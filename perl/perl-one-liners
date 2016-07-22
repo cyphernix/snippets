@@ -15,6 +15,9 @@ perl -d script.pl
 # Run a perl script called script.pl, check syntax then print warnings
 perl -wc script.pl
 
+# Install a perl module 
+perl -MCPAN -e 'install Some::Module'
+
 # Do an update to Upgrade all Perl modules via CPAN
 perl -MCPAN -e 'CPAN::Shell->install(CPAN::Shell->r)'
 
@@ -68,6 +71,9 @@ perl -wlne'/title>([^<]+)/i&&rename$ARGV,"$1.html"' *.html
 
 # Strip html tags from a file called index.html
 cat index.htm | perl -ne 's/\<[^<]*\>//g ;print $_'
+
+# Strip all comment lines in a file much like this one with hash symbols for comments.
+perl -ni.bak -e 's/^#.*$//' yourfile
 
 # Change isolated occurrence of abc to cba in each file *.c or *.h in a directory
 perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
