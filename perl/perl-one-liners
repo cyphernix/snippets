@@ -66,6 +66,9 @@ perl -p -i.old -e 's#<title>#<title>MyWebsite .: #i' *.html
 # This one is a bit like above but although it renames the file name to what is in the html title tag 
 perl -wlne'/title>([^<]+)/i&&rename$ARGV,"$1.html"' *.html
 
+# Strip html tags from a file called index.html
+cat index.htm | perl -ne 's/\<[^<]*\>//g ;print $_'
+
 # Change isolated occurrence of abc to cba in each file *.c or *.h in a directory
 perl -p -i.old -e 's{\babc\b}{cba}g' *.[ch]
 
