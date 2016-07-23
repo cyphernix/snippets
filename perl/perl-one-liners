@@ -117,6 +117,9 @@ perl -e'$,=",";print sub { grep { $a=$_; !grep { !($a % $_) } (2..$_-1)} (2..$_[
 # Look for duplicated words in a line
 perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
 
+# Put all lines in a file on one single line
+perl -ne 'chomp;print;' foo.txt
+
 # Count number of non-hidden files in a directory
 perl -le 'print ~~ map {-s} <*>'
 
