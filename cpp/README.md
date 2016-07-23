@@ -1,6 +1,7 @@
 # C++ Related Code Snippets
 
 Please do not use any of this code. It is not safe although widely available it is for my own testing of stack canarys.
+
 The code is vulnerable to a buffer overflow of 1025 characters or more.
 
 Compile me like this...
